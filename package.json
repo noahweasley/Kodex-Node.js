@@ -1,0 +1,6 @@
+{
+  "type": "commonjs",
+  "dependencies": {
+    "clean-sweep": "^1.1.1"
+  }
+}
