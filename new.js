@@ -7,3 +7,5 @@ stream.on("data", (chunk) => {
 });
 
 const stream2 = fs.createWriteStream("nex.js");
+
+stream2.write("Hello")
