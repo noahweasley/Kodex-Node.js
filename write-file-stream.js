@@ -17,18 +17,6 @@ const createFileWriteStream = (filePath) => {
         callback(err);
       }
     },
-
-//     async final(callback) {
-//       try {
-//         if (fd) {
-//           await fd.close();
-//         }
-//         callback();
-//       } catch (err) {
-//         callback(err);
-//       }
-//     },
-
     async destroy(err, callback) {
       try {
         if (fd) {
