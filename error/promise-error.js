@@ -1,9 +1,30 @@
-const { setTimeout } = require("timers/promises");
+const { setTimeout } = require("./setTimeout");
 
 (async function main() {
-  // IIFE AKA Ifunanya
-  const result = await setTimeout(2000, "done");
-  console.log(result);
+  try {
+    const [res1, res2, res3] = await Promise.all([
+      await setTimeout(5000, "5 seconds"),
+      await setTimeout(3000, "3 seconds"),
+      await setTimeout(1000, "1 second"),
+    ]);
 
-  setTimeout(2000, "done").then((value) => console.log(value));
+    
+    console.log(value);
+  } catch (error) {
+    console.log("An error occurred");
+  } finally {
+    // release database
+  }
 })();
+
+function wait() {
+  // const res = await setTimeout(1000, "data");
+  return new Promise((resolve, reject) => {
+    const rand = Math.random() * 10;
+    if (rand > 5) {
+      reject(new Error("Error occurred"));
+    } else {
+      resolve(rand);
+    }
+  });
+}
