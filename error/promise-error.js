@@ -8,7 +8,6 @@ const { setTimeout } = require("./setTimeout");
       await setTimeout(1000, "1 second"),
     ]);
 
-    
     console.log(value);
   } catch (error) {
     console.log("An error occurred");
