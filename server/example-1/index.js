@@ -12,7 +12,7 @@ server.use(express.urlencoded({ extended: true }));
 
 const PORT = process.env.PORT || 4000;
 
-server.use(logger);
+// server.use(logger);
 server.use("/product", productRoute);
 
 server.post("/submit", (req, res) => {
@@ -24,6 +24,14 @@ server.get("/data", (req, res) => {
   console.log("Got id", req.query.id);
   console.log("Got name", req.query.name);
   res.json();
+});
+
+server.get("/", (_req, res) => {
+  res.redirect("/home");
+});
+
+server.get("/home", (_req, res) => {
+  res.status(301).json({ message: "Redirect to /home successfully" });
 });
 
 server.listen(PORT, () => {
