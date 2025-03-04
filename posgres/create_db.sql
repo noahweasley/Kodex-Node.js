@@ -1,1 +1,1 @@
-CREATE DATABASE productDB
+CREATE DATABASE product
