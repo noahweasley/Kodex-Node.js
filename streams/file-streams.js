@@ -1,6 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const fsp = require("fs/promises");
+const { pipeline } = require("stream");
 
 (async function main() {
   const input = path.join("./streams", "file-streams.js");

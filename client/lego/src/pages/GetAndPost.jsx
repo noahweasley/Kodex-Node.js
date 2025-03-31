@@ -25,7 +25,7 @@ export default function GetAndPost() {
   // };
 
   const setName = () => {
-    fetch("http://localhost:5555/name", {
+    fetch("https://kodex-server-cx89.onrender.com/name", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

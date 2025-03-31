@@ -1,7 +1,7 @@
-const { Sequelize, DataTypes } = require("sequelize");
+const { Sequelize, DataTypes, QueryTypes } = require("sequelize");
 
 const sequelize = new Sequelize(
-  "postgres://postgres:1111@localhost:5432/postgres",
+  "postgresql://kodexdb_owner:npg_kPhb1cnGUBd2@ep-yellow-moon-a8fm9h7h-pooler.eastus2.azure.neon.tech/kodexdb?sslmode=require",
   {
     logging: console.log,
   }
@@ -45,17 +45,17 @@ const sequelize = new Sequelize(
   //     age: 60,
   //   });
 
-  const result = await Customer.findOne({
-    where: {
-      age: 60,
-    },
-  });
+  // const result = await Customer.findOne({
+  //   where: {
+  //     age: 60,
+  //   },
+  // });
 
-  const result1 = await Customer.destroy({
-    where: {
-      age: 60,
-    },
-  });
+  // const result1 = await Customer.destroy({
+  //   where: {
+  //     age: 60,
+  //   },
+  // });
 
-  console.log(result.dataValues);
 })();
+

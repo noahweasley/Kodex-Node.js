@@ -2,7 +2,7 @@ const { Sequelize } = require("sequelize");
 const env = require("./env");
 
 const sequelize = new Sequelize(env.database, env.user, env.password, {
-  ssl: env.NODE_ENV === "production" ? { rejectUnauthorized: false } : false,
+  ssl: { rejectUnauthorized: false, require: true },
   logging: env.NODE_ENV === "production" ? false : console.log,
   host: env.host,
   dialect: "postgres",
