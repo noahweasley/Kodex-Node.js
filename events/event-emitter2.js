@@ -36,10 +36,10 @@ function listener(count) {
 // Attach the "increment" event listener to the counter
 counter.addListener("increment", listener);
 
-// This line tries to remove a listener, remove this line if you want this code to run properly
-counter.removeListener("increment", listener);
-
 // Loop to increment the counter 20 times
 for (let i = 0; i < 20; i++) {
   counter.increment();
 }
+
+// This line tries to remove a listener, remove this line if you want this code to run properly
+counter.removeListener("increment", listener);

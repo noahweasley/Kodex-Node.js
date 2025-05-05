@@ -7,8 +7,14 @@ const { pipeline } = require("stream");
   const input = path.join("./streams", "file-streams.js");
   const stream = fs.createReadStream(input);
   const stream2 = fs.createWriteStream("./output/new-file.js");
-  await fsp.mkdir("./output");
 
+  try {
+    await fsp.stat("./output");
+  } catch (error) {
+    if (error == "ENOENT") await fsp.mkdir("./output");
+  }
+
+  // pipeline(stream, stream2);
   stream.on("data", (chunk) => {
     stream2.write(chunk.toString());
     console.log("Successful");
