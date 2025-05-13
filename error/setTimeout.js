@@ -1,7 +1,9 @@
-module.exports.setTimeout = function (delay, data) {
+function setTimeout(delay, data) {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(data);
     }, delay);
   });
-};
+}
+
+
