@@ -1,9 +1,11 @@
 const express = require("express");
 const server = express();
 require("dotenv").config();
+const logger = require("./middleware/logger");
 
 const port = process.env.PORT;
 server.use(express.json());
+server.use(logger);
 
 server.post("/test", (req, res) => {
   const body = req.body;
