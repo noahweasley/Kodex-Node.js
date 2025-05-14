@@ -2,14 +2,14 @@ const express = require("express");
 const server = express();
 require("dotenv").config();
 const logger = require("./middleware/logger");
+const Joi = require("joi");
 
 const port = process.env.PORT;
 server.use(express.json());
 server.use(logger);
 
-server.post("/test", (req, res) => {
+server.post("/test", async (req, res) => {
   const body = req.body;
-  console.log(body);
   res.send();
 });
 
@@ -41,6 +41,15 @@ server.get("/countries", (request, response) => {
   response
     .status(200)
     .json({ message: "Fetched countries successfully", data: countries });
+});
+
+server.get("/temp", (req, res) => {
+  res.redirect("/new-temp");
+});
+
+server.get("/new-temp", (req, res) => {
+  console.log("Doing a lot!");
+  res.status(301).send();
 });
 
 server.get("/countries/:code", (request, response) => {
