@@ -3,6 +3,16 @@ const server = express();
 require("dotenv").config();
 const logger = require("./middleware/logger");
 const Joi = require("joi");
+const multer = require("multer");
+const fs = require("fs/promises");
+const fsSync = require("fs");
+const path = require("path");
+// Require the Cloudinary library
+const cloudinary = require("cloudinary").v2;
+
+cloudinary.config({
+  secure: true,
+});
 
 const port = process.env.PORT;
 server.use(express.json());
@@ -95,6 +105,42 @@ server.get("/universities/:id", (req, res) => {
     message: "Successfully fetched the university",
     data: uni,
   });
+});
+
+const dir = path.join(process.cwd(), "uploads");
+
+try {
+  fsSync.mkdirSync(dir);
+} catch (ignored) {}
+
+const storage = multer.diskStorage({
+  destination: function (_req, _file, cb) {
+    cb(null, dir);
+  },
+  filename: function (req, file, cb) {
+    cb(null, `upload_${Date.now()}${path.extname(file.originalname)}`);
+  },
+});
+
+var upload = multer({ storage: storage });
+
+server.post("/upload", upload.single("file"), async (req, res) => {
+  const filepath = req.file.path;
+
+  try {
+    const result = await cloudinary.uploader.upload(filepath, {
+      folder: "Kodex",
+      resource_type: "image",
+    });
+
+    res.json({ message: "Upload successful", url: result.secure_url });
+  } catch {
+    res.json({ error: "Could not upload image" });
+  } finally {
+    try {
+      await fs.unlink(filepath);
+    } catch (ignored) {}
+  }
 });
 
 server.listen(port, () => {

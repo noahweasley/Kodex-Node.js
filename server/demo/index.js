@@ -22,6 +22,10 @@ server.use("/api/products", productRoutes);
 server.use("/api/countries", countryRoutes);
 server.use("/api/users", userRoutes);
 
+server.get("/name", () => {
+  throw new UnauthorizedError("Unauthorized", "You cannot use that");
+});
+
 server.all("*", error);
 server.use(errorHandler);
 
@@ -39,6 +43,7 @@ const upload = multer({ storage });
 
 // Ensure uploads folder exists
 const fs = require("fs");
+const { UnauthorizedError } = require("./util/client-error");
 const uploadDir = "uploads";
 if (!fs.existsSync(uploadDir)) {
   fs.mkdirSync(uploadDir);

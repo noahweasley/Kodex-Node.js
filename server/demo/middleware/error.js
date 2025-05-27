@@ -1,7 +1,5 @@
-module.exports = function (req, _res) {
-  if (!req.route) {
-    const error = new Error("Resource not found");
-    error.status = 404;
-    next(error);
-  }
+const { BadRequestError } = require("../util/error-definitions");
+
+module.exports = function (_req, _res, next) {
+  next(new BadRequestError());
 };
